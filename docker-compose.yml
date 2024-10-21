@@ -3,7 +3,7 @@ version: "3"
 services:
   ubuntu-desktop:
     image: dorowu/ubuntu-desktop-lxde-vnc:latest
-    exposes:
+    expose:
       - "6080"
     environment:
       - VNC_PASSWORD=${SERVICE_PASSWORD_VNC}
