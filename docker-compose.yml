@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  xrdp:
+    build: .
+    ports:
+      - "3389:3389"
+    volumes:
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    restart: unless-stopped

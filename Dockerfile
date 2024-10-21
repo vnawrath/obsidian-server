@@ -29,8 +29,5 @@ RUN sed -i.bak '/fi/a #xrdp multiple users configuration \nstartxfce4' /etc/xrdp
 # Expose RDP port
 EXPOSE 3389
 
-# Copy supervisord configuration file
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Start supervisord to manage services
 CMD ["/usr/bin/supervisord", "-n"]
