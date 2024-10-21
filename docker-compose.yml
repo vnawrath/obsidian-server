@@ -4,7 +4,7 @@ services:
   ubuntu-desktop:
     image: dorowu/ubuntu-desktop-lxde-vnc:latest
     exposes:
-      - "6079"
+      - "6080"
     environment:
       - VNC_PASSWORD=${SERVICE_PASSWORD_VNC}
       - RESOLUTION=1920x1080
