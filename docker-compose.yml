@@ -1,41 +1,13 @@
-version: "3.8"
+version: "3"
 
 services:
-  xrdp:
-    build: .
-    volumes:
-      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
-    restart: unless-stopped
-
-  guacamole:
-    image: guacamole/guacamole
-    environment:
-      GUACD_HOSTNAME: guacd
-      MYSQL_HOSTNAME: guacamole-mysql
-      MYSQL_DATABASE: ${SERVICE_FQDN_GUACAMOLE:-guacamole_db}
-      MYSQL_USER: ${SERVICE_USER_GUACAMOLE}
-      MYSQL_PASSWORD: ${SERVICE_PASSWORD_GUACAMOLE}
+  ubuntu-desktop:
+    image: dorowu/ubuntu-desktop-lxde-vnc:latest
     expose:
-      - "8080"
-    depends_on:
-      - guacd
-      - guacamole-mysql
-    restart: unless-stopped
-
-  guacd:
-    image: guacamole/guacd
-    restart: unless-stopped
-
-  guacamole-mysql:
-    image: mysql:5.7
+      - "5900"
     environment:
-      MYSQL_ROOT_PASSWORD: ${SERVICE_PASSWORD_MYSQL_ROOT}
-      MYSQL_DATABASE: ${SERVICE_FQDN_GUACAMOLE:-guacamole_db}
-      MYSQL_USER: ${SERVICE_USER_GUACAMOLE}
-      MYSQL_PASSWORD: ${SERVICE_PASSWORD_GUACAMOLE}
+      - VNC_PASSWORD=${SERVICE_PASSWORD_VNC}
+      - RESOLUTION=1920x1080
     volumes:
-      - guacamole-mysql-data:/var/lib/mysql
+      - /dev/shm:/dev/shm
     restart: unless-stopped
-
-volumes:
-  guacamole-mysql-data:
